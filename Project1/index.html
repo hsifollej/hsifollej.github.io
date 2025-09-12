@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT ONE</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      background: #f2caf1af;
+      text-align: justify;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px;
+      background: #d555d12f;
+      color: #fff;
+      margin: 2;
+      text-shadow: 1px -1px 1px rgb(220, 72, 176,0.5),1px  1px 1px rgb(220, 72, 176,0.5)
+    }
+    section {
+      padding: 2rem 5%;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>[PROJECT 0NE]</h1>
+  <section id="overview">
+    <h2>Overview:</h2>
+    <p>
+      This project combines a strip of B, G, R channels stacked vertically
+      and reconstructs them into a fully colored photograph. For low resolution images like the .pngs, a sliding pixel window (single-scale) is used to match pixels of the 3 channels.
+      For high resolution images like the .tif photos, both the
+      single-scale alignment function and a pyramid-based coarse-to-fine alignment is used to construct the coloured image.
+    </p>
+  </section>
+
+  <section id="approach">
+    <h2>Approach:</h2>
+    <p>
+      We begin with a sliding pixel window to estimate alignment across the 3 channels
+      based on similarity metrics such as Euclidean distance and Normalized Cross-Correlation (NCC). While both functions are present in code, I decided to standardize using NCC for all alignments.
+      For high resolution images, it would be too time-consuming to match 15x15 pixels of a 3000px x 2000px image, hence a pyramid is used to downscale the original image (by scale of 2), creating coarsed versions of it. 
+      Subsequently, the alignment can be done on the coarser images, which progressively get bigger/more refined, allowing us to eventually align the original resolution image.
+    </p>
+  </section>
+
+  <section id="challenges">
+    <h2>Challenges:</h2>
+    <p>
+      Initially, my output image appeared colored but the offset was evidently too high, as double lines were visible. I realised I overlooked an important step, which was to crop the image before alignment.
+      After implementing the crop function, my images became much clearer. For the bigger images, I realised they required a bit more pre-processing, or they would look off as well.
+    </p>
+    <div class="gallery">
+      <img src="outputs/output test.png" alt="Photo 1">
+      <img src="outputs/emir-raw.png" alt="Photo 2">
+    </div>  
+  </section>
+
+  <section id="results">
+    <h2>Colored Photos</h2>
+    <div class="gallery">
+      <img src="outputs/cathedral.png" alt="Photo 1">
+      <img src="outputs/monastery.png" alt="Photo 2">
+      <img src="outputs/tobolsk.png" alt="Photo 3">
+      <img src="outputs/church.png" alt="Photo 4">
+      <img src="outputs/emir.png" alt="Photo 5">
+      <img src="outputs/harvesters.png" alt="Photo 6">
+      <img src="outputs/icon-pyramid.png" alt="Photo 7">
+      <img src="outputs/lastochikino.png" alt="Photo 8">
+      <img src="outputs/lugano.png" alt="Photo 9">
+      <img src="outputs/melons.png" alt="Photo 10">
+      <img src="outputs/self_portrait.png" alt="Photo 11">
+      <img src="outputs/siren.png" alt="Photo 12">
+      <img src="outputs/three_generations.png" alt="Photo 13">
+      <img src="outputs/italil.png" alt="Photo 14">
+    </div>
+  </section>
+
+  <section id="results">
+    <h2>Offsets</h2>
+    <img 
+        src="extra_media/offsettable.png" alt="Extra Photo 1"
+        style="width: 60%; max-width: 700px; height: auto; display: block; margin: 0 auto;">
+  </section>
+
+  <section id="extra">
+    <h2>Extra Photos</h2>
+    <p> I thought they were so pretty!</p>
+    <div class="gallery">
+      <img src="outputs/building.png" alt="Extra Photo 1">
+      <img src="outputs/poppy.png" alt="Extra Photo 2">
+      <img src="outputs/tree.png" alt="Extra Photo 3">
+      <img src="outputs/greenhouse.png" alt="Extra Photo 4">
+      <img src="outputs/lake.png" alt="Extra Photo 5">
+      <img src="outputs/waterfall.png" alt="Extra Photo 6">
+    </div>
+  </section>
+
+</body>
+</html>
