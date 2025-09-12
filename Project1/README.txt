@@ -1,2 +1,4 @@
-- Run main.ipynb and obtain different results by uploading different images in cell2
+- Run main.ipynb and obtain different results by uploading different images
 - Text and results on website 
+- For low-res images, run the first half of the cells.
+- For high-res images, run the image and height cell, then the last 3 cells of main.ipynb
