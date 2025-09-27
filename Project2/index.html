@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT TWO</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      background: #f2caf1af;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px;
+      background: #d555d12f;
+      color: #fff;
+      margin: 2;
+      text-shadow: 1px -1px 1px rgb(220, 72, 176,0.5),1px  1px 1px rgb(220, 72, 176,0.5)
+      
+    }
+    h2{
+      color: #598c8b;
+    }
+    .task {
+      background: #f6feff;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .task img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 5px;
+    }
+    .img-row {
+      display: flex;
+      gap: 3px;       
+    }
+    .img-row img {
+      width: 50%;      
+      border-radius: 6px;
+    }
+    .task h2 {
+      margin: 10px 0;
+    }
+    .task p {
+      color: #598c8b;
+      font-size:16px;
+      text-align: justify;
+    }
+    .gif{
+        width:331px;
+        height:445px;
+        margin:auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>[PROJECT TW0]</h1>
+
+  <div class="task">
+    <h2>Part 1.1: Convolutions from Scratch</h2>
+    <div class="img-row">
+        <img src="output/2loops code.png" alt="Task 1">
+        <img src="output/4loops code.png" alt="Task 1">
+    </div>
+    <p>L: 2 for loops R: 4 for loops</p>
+
+    <p> 2 loops does fewer operations so its runtime is shorter. Boundaries are handled using zero-fill padding, same as in scipy. Outputs are 2D arrays, same as scipy.
+        Comparing this with scipy's convolve2d, the output will be similar given the input is padded correctly. </p>
+    <div class="img-row">
+        <img src="output/2loops.png" alt="Task 1">
+        <img src="output/4loops.png" alt="Task 1">
+    </div>
+    <p>There is barely any visual difference, but dark objects in 2 loops (e.g. hair, trees) look darker than in the 4 loops.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part 1.2: Finite Difference Operator</h2>
+    <img src="output/partdev.png" alt="Task 2">
+    <div class="img-row">
+        <img src="output/gradmag.png" alt="Task 2">
+        <img src="output/edgeimage.png" alt="Task 2">
+    </div>
+    <p>The higher the q, the image becomes less noisy but the lines also become fainter. I settled on a threshold where the background scenery is still visible, even if it means more noise.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part 1.3: Derivative of Gaussian (DoG) Filter</h2>
+    <div class="img-row">
+        <img src="media/cameraman.png" alt="Task 2">
+        <img src="output/gaussian.png" alt="Task 2">
+    </div>
+    <p> After convoluting with Gaussian filter, image becomes blur as pixels blend into average values of pixels around it.</p>   
+    <div class="img-row">
+        <img src="output/gaussiangradmag.png" alt="Task 2">
+        <img src="output/gaussianedgereal.png" alt="Task 2">
+    </div>
+    <p>With gaussian filter beforehand, the binarized edge image is much less noisy at the same threshold, while preserving the fine details. The lines are also slightly thicker and more consistent in thickness (less shaky).</p>
+    <div class="img-row">
+        <img src="output/doggradmag.png" alt="Task 2">
+        <img src="output/dogedgereal.png" alt="Task 2">
+    </div>
+    <p>With single convolution DoG, the results are identical to the previous.</p>
+
+  <div class="task">
+    <h2>Part 2.1: Image "Sharpening"</h2>
+    <div class="img-row">
+        <img src="media/blur.jpg" alt="Task 3">
+        <img src="output/unsharpmask.png" alt="Task 3">
+    </div>
+    <p> The details of the Taj become more prominent, specifically the intricate line details. Varying the sharpening amount makes the lines more prominent. This is expected because the high frequencies (details) are getting enhanced.</p>
+    <div class="img-row">
+        <img src="media/blur2.png" alt="Task 3">
+        <img src="output/unsharpmaskreconstruct.png" alt="Task 3">
+    </div>
+    <p> Reconstructing a blurry picture of The Bund, it's also observed that the line details are most prominently sharpened (e.g. windows on buildings, storeys). However, because the blurry image has a reduced resolution, the results will also not have a very high resolution, so the image still does not appear sharp/crisp.
+        A comparison of the original imgae and the output is below: </p>
+    <div class="img-row">
+        <img src="media/skyline.jpg" alt="Task 3">
+        <img src="output/unsharpmaskreconstruct.png" alt="Task 3">
+    </div>
+  </div>
+
+  <div class="task">
+    <h2>Part 2.2: Hybrid Images</h2>
+    <img src="output/CATfinal.png" alt="Task 3">
+    <p>Derek (high pass) and Nutmeg (low pass)</p>
+    <div class="img-row">
+        <img src="media/conrad.jpg" alt="Task 3">
+        <img src="media/manon.jpg" alt="Task 3">
+    </div>
+    <div class="img-row">
+        <img src="media/jeremiah.jpg" alt="Task 3">
+        <img src="media/robert.png" alt="Task 3">
+    </div>
+    <div class="img-row">
+        <img src="output/tsitp.png" alt="Task 3">
+        <img src="output/robertmanon.png" alt="Task 3">
+    </div>
+    <p> 2 other hybrid images. The first is of Conrad (low pass) and Jeremiah (high pass) from the show TSITP. The second is Robert Downey Jr (high pass) and Manon Bannerman (low pass). I chose these 2 because of their different expressions. </p>
+    <img src="output/hybridREAL.png" alt="Task 3">
+    <img src="output/frequencydomain.png" alt="Task 3">
+    <p>Filtered images and frequency domains of Robert x Manon</p>
+  
+  </div>
+
+  <div class="task">
+    <h2>Part 2.3: Gaussian and Laplacian Stacks</h2>
+    <img src="output/oraple.png" alt="Task 3">
+    <p> Oraple: By adjusting sigma, the blend can be adjusted to be more or less seamless.</p>
+    <img src="output/oraplestack.png" alt="Task 3">
+    <p> Gaussian and Laplacian stacks for Oraple, no downsampling. It was important to ensure the color channels were consistent or a LOT of errors appear.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part 2.4: Multiresolution Blending</h2>
+    <div class="img-row">
+        <img src="output/dolpin.png" alt="Task 3">
+        <img src="output/finallemon.png" alt="Task 3">
+    </div>
+    <p> Dolphin X Banana with irregular mask (it was difficult to feather out the edges without the original blue background spilling over too much)
+        and Lemon X Moon.
+    </p>
+  </div>
+
+
+</body>
