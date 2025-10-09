@@ -146,9 +146,11 @@
         <br><br> Next, the homography matrix was computed using the computeH function. I observed this downscaled homography matrix was different from that of the original image, which shows that homography is specific to pixel coordinates, rather than being a scaling constant. 
         <br><br> Using inverse warping and by implementing bilinear interpolation, a smooth and complete output warped leftside image can be achieved. However, when warping an image, it might shift outside the original coordinate system, so it is necessary to bound the warp. The warp_bound() function transforms the 4 corners of the image and finds the min/max coordinates, which determines the canvas size. A translation matrix T is used to translate/offset the warped image if it has negative coordinates. This ensures all pixels have positive coordinates on the canvas.
     </p> 
-    <img src="concept/translation.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <img src="concept/trans.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <br>
     <p>
-        Last, the images are blended together with feathering to smoothen the edges and seamlessly stitch the images together. A naive overlay would result in visible seams due to exposure differences, slight misalignments from inaccurate pixel selections etc. To soften this overlap region, the pixels were blended based on their distance from edges. (i.e Pixels closer to image 1's edge get more contribution from image 2). This weighted average blending method creates a smooth, seamless transition betweeen the 2 images. <br><br>
+        Last, the images are blended together with feathering to smoothen the edges and seamlessly stitch the images together. A naive overlay would result in visible seams due to exposure differences, slight misalignments from inaccurate pixel selections etc. To soften this overlap region, the pixels were blended based on their distance from edges. (i.e Pixels closer to image 1's edge get more contribution from image 2). This weighted average blending method creates a smooth, seamless transition betweeen the 2 images.
     </p>
+    <img src="concept/weight.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
   </div> 
 </body>
