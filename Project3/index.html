@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT THREE</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      background: #f2caf1af;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px;
+      background: #d555d12f;
+      color: #fff;
+      margin: 2;
+      text-shadow: 1px -1px 1px rgb(220, 72, 176,0.5),1px  1px 1px rgb(220, 72, 176,0.5)
+      
+    }
+    h2{
+      color: #598c8b;
+    }
+    .task {
+      background: #ffffff;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .task img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 5px;
+    }
+    .img-row {
+      display: flex;
+      gap: 3px;       
+    }
+    .img-row img {
+      width: 50%;      
+      border-radius: 6px;
+    }
+    .task h2 {
+      margin: 10px 0;
+    }
+    .task p {
+      color: #598c8b;
+      font-size:16px;
+      text-align: justify;
+    }
+    .gif{
+        width:331px;
+        height:445px;
+        margin:auto;
+    }
+    .img-row.three img {
+        width: 33%;  
+    }
+  </style>
+</head>
+<body>
+
+  <h1>[PROJECT THREE]</h1>
+
+  <div class="task">
+    <h2>Part A1: Shoot the Picture</h2>
+    <div class="img-row">
+        <img src="media/iceleft.jpg" alt="Task 1">
+        <img src="media/iceright.jpg" alt="Task 1">
+    </div>
+    <div class="img-row">
+        <img src="media/doorleft.jpg" alt="Task 1">
+        <img src="media/doorright.jpg" alt="Task 1">
+    </div>
+    <p>These pairs of images share the same center of projection as they were taken by rotating the phone camera instead of translating the phone. Thus, the pencil of rays are the same, allowing the image pairs to be related by homography.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part A2: Recover Homographies</h2>
+    <p>The points of correspondence were manually labelled on pixspy.com and stored as arrays. Corners or notieceable features were chosen to ensure high pixel choosing accuracy, which greatly affects the quality of the output image.</p>
+    <img src="concept/array.png" alt="Task 2">
+    <img src="output/visual2.png" alt="Task 2">
+    <img src="output/correspond.png" alt="Task 2">
+    <p>A homography means that point (x,y) on image 1 can be mapped to point (x',y') on second image by H, which forms the following relationship after normalisation: </p>
+    <img src="concept/homography.png" alt="Task 2" 
+     style="width:30%; display:block; margin:auto;">
+    <p>By substituting the coordinates of points of correspondence into the equation and expressing in the form of Ah=0, the system of equations can be obtained. Each point of correspondence gives 2 equations. With 10 point pairs, I will have 20 equations for 9 unknown h values, which makes an overdetermined system. Thus, the system should be solved using least-squares method. Here are a few equations:</p> 
+    <img src="concept/points.jpg" alt="Task 2" 
+     style="width:70%; display:block; margin:auto;">
+    <p> Recovered 3x3 homography matrix for hallway photos:</p>
+    <img src="output/matrix.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+  </div>
+
+  <div class="task">
+    <h2>Part A3: Warp the Images</h2>
+    <p> warpImageNearestNeighbor(im, H) and warpImageBilinear(im, H) were implemented using inverse warping. Inverse warping uses interpolation and ensures every pixel in the output image has a colour assigned to it. This prevents visual defects like black pixels/holes, which happens in forward warping.</p>
+    <img src="concept/warping.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <p> Conceptually, the results of nearest neighbours and bilinear differ based on clarity of output image. Since nearest neighbours round coordinates to the nearest pixel value, the results might appear more blocky, with edges looking more jagged. Bilinear uses the weighted average of the 4 neighbouring pixels, which results in a smoother blend between the pixels' colours.</p>
+    <img src="concept/warpingmethod.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <br>
+    <p>Image Rectification:</p>
+    <div class="img-row three">
+        <img src="media/monalisa.png" alt="Image 1">
+        <img src="output/nn.png" alt="Image 2">
+        <img src="output/bil.png" alt="Image 3">
+    </div>
+    <br>
+    <div class="img-row three">
+        <img src="media/kento.jpg" alt="Image 1"style="width:25%;">
+        <img src="output/im2nn.png" alt="Image 2"style="width:37%;">
+        <img src="output/im2bil.png" alt="Image 3"style="width:37%;">
+    </div>
+    <p> Comparing the source image, nearest neighbours and bilinear interpolation, the difference is minute. Upon closer look, the bilinear image is observed to appear smoother than the nearest neighbours. This difference will probably be more stark if the source images have distinct edges/patterns. </p>
+  </div>
+
+  <div class="task">
+    <h2>Part A4: Blend the Images into a Mosaic</h2>
+    <p>In this part, the images related by homography are blended into a mosaic, stitched at the points of correspondence. To give off the panoramic effect, weighted averaging of the pixels is used to reduce edge artifacts. The outputs are:</p>
+    <div class="img-row">
+        <img src="media/houseleft.jpg" alt="Image 1">
+        <img src="media/houseright.jpg" alt="Image 2">
+    </div>
+    <img src="output/house.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>Some parts of the output image are unclear (e.g. tree leaves in the above image), potentially due to a lack of points of correspondence in the tree leaves area, or motion of the leaves when capturing the photos.</p>
+    
+    <br>
+    <div class="img-row">
+        <img src="media/doorleft.jpg" alt="Image 1">
+        <img src="media/doorright.jpg" alt="Image 2">
+    </div>
+    <img src="output/room.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <br>
+    <div class="img-row">
+        <img src="media/iceleft.jpg" alt="Image 1">
+        <img src="media/iceright.jpg" alt="Image 2">
+    </div>
+    <img src="output/ice.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <br>
+    <h2> Procedure</h2>
+    <p>
+        I wanted to leave the right side image unwarped, and only warp the left side image to the right's projection. Thus, a transformation for the left image needs to be derived, to allow the 2 images to blend seamlessly. <br><br> 
+        The first step was to find the points of correspondence, which were found in earlier parts. However, since I downscaled the image's size to reduce computational running time, these points also needed to be scaled down, producing im1_small, im2_small, im1_pts_scaled and im2_pts_scaled. These points tell us "this feature in im1 is the same as this feature in im2".
+        <br><br> Next, the homography matrix was computed using the computeH function. I observed this downscaled homography matrix was different from that of the original image, which shows that homography is specific to pixel coordinates, rather than being a scaling constant. 
+        <br><br> Using inverse warping and by implementing bilinear interpolation, a smooth and complete output warped leftside image can be achieved. However, when warping an image, it might shift outside the original coordinate system, so it is necessary to bound the warp. The warp_bound() function transforms the 4 corners of the image and finds the min/max coordinates, which determines the canvas size. A translation matrix T is used to translate/offset the warped image if it has negative coordinates. This ensures all pixels have positive coordinates on the canvas.
+    </p> 
+    <img src="concept/translation.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <p>
+        Last, the images are blended together with feathering to smoothen the edges and seamlessly stitch the images together. A naive overlay would result in visible seams due to exposure differences, slight misalignments from inaccurate pixel selections etc. To soften this overlap region, the pixels were blended based on their distance from edges. (i.e Pixels closer to image 1's edge get more contribution from image 2). This weighted average blending method creates a smooth, seamless transition betweeen the 2 images. <br><br>
+    </p>
+  </div> 
+</body>
