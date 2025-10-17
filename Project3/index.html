@@ -153,4 +153,80 @@
     </p>
     <img src="concept/weight.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
   </div> 
+
+  <div class="task">
+    <h2>Part B1: Harris Corner Detection</h2>
+    <div class="img-row">
+        <img src="output/harris2.png" alt="Task 1">
+        <img src="output/anms2.png" alt="Task 1">
+    </div>
+    <p>The core principle of Harris's corner detection is to find pixels where the local gradient varies strongly in both x and y directions. Without Adaptive Non-Maximal Suppression (ANMS), the detected corners are very dense, which provides uneven amount of information. 
+      After ANMS, only 500 corners with the strongest corner strength function (below) were selected. </p>
+    
+    <img src="concept/cornerstrength.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+      <p>To decide which corners to select, the neighbours and space around each pixel are also taken into account. Thus, a strong corner in a weak area is prioritised over a strong corner in a strong area. This results in sparser corners detected, 
+      allowing for more holistic homography to be computed.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part B2: Feature Descriptor Extraction</h2>
+     <img src="output/icefeatures.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <p>These are 20 samples of 8x8 patches (from 40x40 windows) from the glacier image. </p>
+  </div>
+
+  <div class="task">
+    <h2>Part B3: Feature Matching</h2>
+    <p> Finding the right threshold using Lowe's thresholding ratio was particularly interesting because different images required different thresholds, depending on what elements were present in the image. 
+      The ratio (r) tries to ensure that the match found is significantly better than the second best, and the match is only accepted if the r < threshold.
+    </p>
+  
+    <img src="concept/ratio.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <img src="concept/eqn.png" alt="Task 2"style="width:30%; display:block; margin:auto;">
+    
+    <p> According to figure 6b in the research paper, the best threshold is around 0.6-0.7, as there is a good mix/overlap of correct and incorrect points.</p>
+    <img src="concept/6b.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <div class="img-row">
+        <img src="output/threshold49.png" alt="Task 1">
+        <img src="output/threshold65.png" alt="Task 1">
+    </div>
+    <p>In the right image where threshold is 0.65, we see the results align with figure 6b, as there are numerous incorrect matches, such as matching the edge of the door frame to the ceiling. </p>
+    <p>When the threshold is lowered to 0.49 (left image),most matches are correct but they are not spread out across the image, which may not give us a very good mosaic.</p>
+    <img src="output/matchedamazing.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p> However, on another set of images, a threshold of 0.70 was able to match many features correctly, which was unexpected. I also noticed how good the auto-feature matching was, as it could differentiate between all the details in the grass, which a manual matcher (me!) cannot do. This shows that different features/image compositions require different thresholds, and the program will perform better on certain images than on others. </p>
+  </div>
+  
+  <div class="task">
+    <h2>Part B4: RANSAC for Robust Homography</h2>
+    <p> Applying 4-point RANSAC will help to filter the matches even more, as outliers (incorrect matches) are removed. It is important to remove outliers as they will affect the homography matrix, which ultimately affects the least-squares computation and mosaic blending. RANSAC works by picking (4) random samples and fitting models over pairs of points. For each pair, reprojection error is calculated. If this error < threshold, the point is an inlier. 
+    This is a iterative process, and the model with the highest number of inliers (aka smallest total error) will be the final homography matrix.  </p>
+    <img src="concept/ransacmodel.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>Because RANSAC is random, each run may produce a different number of inliers, and adjusting the number of iterations and threshold controls the robustness of RANSAC. I adjusted the parameters to attain an inlier % of about 25~35% (empirical), as I find this gives the best results.
+    <img src="concept/ransac threshold.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    
+    <p>RANSAC Glacier: </p>
+    <img src="output/iceransac.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;"> 
+    <p>Manual Glacier: </p>
+    <img src="output/ice.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;"> 
+    <p> Difference: The most noticeable difference is in the grass patch at the foreground. In the ransac, the blades of grass and mud were extremely clear, sharp and defined! In the manual mosaic, the grass was blurry due to the lack of points of correspondence in that area, as it is hard to pinpoint the exact pixels in a grass patch with the human eye. </p>  
+    <p>RANSAC Hallway: </p>
+    <img src="output/ransacroom.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;"> 
+    <p>Manual Hallway: </p>
+    <img src="output/room.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>Difference: For the hallway, the lights in the ransac hallway are clearer than those in the manual mosaic. The flooring pattern is also more defined in the ransac image, with the squares in certain areas being more distinct. However, the manual points picked were probably more strategic, as I picked more points on the door frame, which helps the door frames in the manual mosaic look clearer than the ransac ones. </p>
+    <p>RANSAC Campus: </p>
+    <div class="img-row">
+        <img src="media/schleft.jpg" alt="Task 1">
+        <img src="media/schright.jpg" alt="Task 1">
+    </div>
+    <img src="output/schoolransac.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p> Something interesting I noticed was that tree leaves are really distracting for the computer. If the tree takes up a large part of the shared FOV between the 2 images, the computer loves to choose the matched features to be the tree leaves, instead of other more distinct corners like the campanile. Even when the threshold increased, the corners of the campanile remained unselected. This is probably because the contrast between the leaves and the background is much greater.</p>
+    <p>RANSAC Desk: </p>
+    <div class="img-row">
+        <img src="media/deskleft.jpg" alt="Task 1">
+        <img src="media/deskright.jpg" alt="Task 1">
+    </div>
+    <img src="output/deskransac.jpg" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p> This set of images surprised me because the smiley face is still perfectly round, yet the computer looks distorted. There was also less matched features (only 9) for this image, and none of the matches were points on the smiley face. Yet, the output came out really nice!</p>
+    <p> I think it is safe to conclude auto-stitching does a better job than manual stitching. Not just because it is more time-efficient, but also because it produces better results, as long as the parameters and thresholds are appropriate, and images have distinct features.</p>
+  </div>
 </body>
