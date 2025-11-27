@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT FIVE</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      background: #f2caf1af;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px;
+      background: #d555d12f;
+      color: #fff;
+      margin: 2;
+      text-shadow: 1px -1px 1px rgb(220, 72, 176,0.5),1px  1px 1px rgb(220, 72, 176,0.5)
+      
+    }
+    h2{
+      color: #598c8b;
+    }
+    .task {
+      background: #ffffff;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .task img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 5px;
+    }
+    .img-row {
+      display: flex;
+      gap: 3px;       
+    }
+    .img-row img {
+      width: 50%;      
+      border-radius: 6px;
+    }
+    .task h2 {
+      margin: 10px 0;
+    }
+    .task p {
+      color: #598c8b;
+      font-size:16px;
+      text-align: justify;
+    }
+    .gif{
+        width:331px;
+        height:445px;
+        margin:auto;
+    }
+    .img-row.three img {
+        width: 33%;  
+    }
+    .img-row.five img {
+        width:20%;  
+    }
+    .img-row.six img {
+        width:16%;  
+    }
+  </style>
+</head>
+<body>
+
+  <h1>[PROJECT FIVE]</h1>
+
+  <div class="task">
+    <h2>Part 0: Setup</h2>
+    <img src="output5/prompts.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
+    <p>These are the prompts in my dictionary. Below are the generated images using random seed = 17:</p>
+    <p>Sea Turtle, Lighthouse, and Mushroom Forest (5 steps)</p>
+    <div class="img-row three">
+        <img src="output5/turtle.png" alt="Image 1"style="width:33%;">
+        <img src="output5/lighthouse.png" alt="Image 2"style="width:33%;">
+        <img src="output5/mushroom.png" alt="Image 3"style="width:33%;">
+    </div>
+    <p>Sea Turtle, Lighthouse, and Mushroom Forest (20 steps)</p>
+    <div class="img-row three">
+        <img src="output5/turtle20.png" alt="Image 1"style="width:33%;">
+        <img src="output5/lighthouse20.png" alt="Image 2"style="width:33%;">
+        <img src="output5/mushroom20.png" alt="Image 3"style="width:33%;">
+    </div>
+    <p>Sea Turtle, Lighthouse, and Mushroom Forest (50 steps)</p>
+    <div class="img-row three">
+        <img src="output5/turtle50.png" alt="Image 1"style="width:33%;">
+        <img src="output5/lighthouse50.png" alt="Image 2"style="width:33%;">
+        <img src="output5/mushroom50.png" alt="Image 3"style="width:33%;">
+    </div>
+    <p>As observed, the output quality is better when there are more inference steps. At just 5 steps, the images appear grainy and it is difficult to distinguish the sea turtle. At 50 steps, the images are very well defined.</p>
+  </div>
+
+  <div class="task">
+    <h2>Part 1.1: Implementing the Forward Process</h2>
+    <p>After implementing the noisy_im = forward(im,t) function, the Campanile at noise levels 250,500,750 are shown: </p>
+    <div class="img-row three">
+        <img src="output5/testimagenoise.png" alt="Image 1"style="width:33%;">
+        <img src="output5/testnoise2.png" alt="Image 2"style="width:33%;">
+        <img src="output5/testnoise3.png" alt="Image 3"style="width:33%;">
+    </div>
+    <h2>Part 1.2: Classical Denoising</h2>
+    <p>Using Gaussian blur filtering to remove the noise did not produce desireable results. The Gaussian-denoised versions are below:</p>
+    <div class="img-row">
+        <img src="output5/testimagenoise.png" alt="Image 1"style="width:50%;">
+        <img src="output5/denoise1.png" alt="Image 2"style="width:50%;">
+    </div>
+    <div class="img-row">
+        <img src="output5/testnoise2.png" alt="Image 1"style="width:50%;">
+        <img src="output5/denoise2.png" alt="Image 2"style="width:50%;">
+    </div>
+    <div class="img-row">
+        <img src="output5/testnoise3.png" alt="Image 1"style="width:50%;">
+        <img src="output5/denoise3.png" alt="Image 2"style="width:50%;">
+    </div>
+    <h2>Part 1.3: One-Step Denoising</h2>
+    <p>Original Image:</p>
+    <img src="output5/campanile.jpg" alt="Task 2"style="width:30%; display:block; margin:auto;">
+    <p>Noisy images:</p>
+    <div class="img-row three">
+        <img src="output5/testimagenoise.png" alt="Image 1"style="width:33%;">
+        <img src="output5/testnoise2.png" alt="Image 2"style="width:33%;">
+        <img src="output5/testnoise3.png" alt="Image 3"style="width:33%;">
+    </div>
+    <p>Estimate of original images:</p>
+    <div class="img-row three">
+        <img src="output5/denoisee1.png" alt="Image 1"style="width:33%;">
+        <img src="output5/denoisee2.png" alt="Image 2"style="width:33%;">
+        <img src="output5/denoisee3.png" alt="Image 3"style="width:33%;">
+    </div>
+    <h2>Part 1.4: One-Step Denoising</h2>
+    <p>Noisy Campanile every 5th loop of denoising:</p>
+    <div class="img-row five">
+        <img src="output5/690.png" alt="Image 1"style="width:20%;">
+        <img src="output5/540.png" alt="Image 2"style="width:20%;">
+        <img src="output5/390.png" alt="Image 3"style="width:20%;">
+        <img src="output5/240.png" alt="Image 3"style="width:20%;">
+        <img src="output5/90.png" alt="Image 3"style="width:20%;">
+    </div>
+    <p>Iteratively Denoised Image, One step results and Gaussian blur:</p>
+    <div class="img-row three">
+        <img src="output5/final.png" alt="Image 1"style="width:33%;">
+        <img src="output5/onestep.png" alt="Image 2"style="width:33%;">
+        <img src="output5/gaussainblur.png" alt="Image 2"style="width:33%;">
+    </div>
+  </div>
+
+  <div class="task">
+    <h2>Part 1.5: Diffusion Model Sampling</h2>
+    <p>5 sampled images (not great quality):</p>
+    <div class="img-row five">
+        <img src="output5/wtf1.png" alt="Image 1"style="width:25%;">
+        <img src="output5/wtf2.png" alt="Image 2"style="width:25%;">
+        <img src="output5/wtf3.png" alt="Image 3"style="width:25%;">
+        <img src="output5/wtf4.png" alt="Image 3"style="width:25%;">
+        <img src="output5/wtf5.png" alt="Image 3"style="width:25%;">
+    </div>
+
+    <h2>Part 1.6: Classifier-Free Guidance (CFG)</h2>
+    <p>After implementing the iterative_denoise_cfg function, here are 5 better images:</p>
+    <div class="img-row five">
+        <img src="output5/wtaf1.png" alt="Image 1"style="width:25%;">
+        <img src="output5/wtaf2.png" alt="Image 2"style="width:25%;">
+        <img src="output5/wtaf3.png" alt="Image 3"style="width:25%;">
+        <img src="output5/wtaf4.png" alt="Image 3"style="width:25%;">
+        <img src="output5/wtaf5.png" alt="Image 3"style="width:25%;">
+    </div>
+
+    <h2>Part 1.7: Image-to-image Translation</h2>
+    <p>Series of edits that gradually match the original Campanile image:</p>
+    <div class="img-row six">
+        <img src="output5/camp1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/camp2.png" alt="Image 2"style="width:16%;">
+        <img src="output5/camp3.png" alt="Image 3"style="width:16%;">
+        <img src="output5/camp4.png" alt="Image 3"style="width:16%;">
+        <img src="output5/camp5.png" alt="Image 3"style="width:16%;">
+        <img src="output5/camp6.png" alt="Image 3"style="width:16%;">
+    </div>
+    <p>Applying this to 2 of my own images:</p>
+    <div class="img-row">
+        <img src="output5/goldengate.jpg" alt="Image 1"style="width:50%;">
+        <img src="output5/fountain.jpg" alt="Image 2"style="width:50%;">
+    </div>
+    <p>Golden Gate Bridge with starting index of [1, 3, 5, 7, 10, 20] steps </p>
+    <div class="img-row six">
+        <img src="output5/gate1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/gate3.png" alt="Image 2"style="width:16%;">
+        <img src="output5/gate5.png" alt="Image 3"style="width:16%;">
+        <img src="output5/gate7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/gate10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/gate20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <p>Trevi Fountain with starting index of [1, 3, 5, 7, 10, 20] steps </p>
+    <div class="img-row six">
+        <img src="output5/fountain1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/fountain3.png" alt="Image 1"style="width:16%;">
+        <img src="output5/fountain5.png" alt="Image 2"style="width:16%;">
+        <img src="output5/fountain7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/fountain10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/fountain20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <h2>Part 1.7.1: Editing Hand-Drawn and Web Images</h2>
+    <p>Edited Web Image:</p>
+    <img src="output5/moretree.jpg" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <p>Iterative steps [1,3,5,7,10,20]:</p>
+    <div class="img-row six">
+        <img src="output5/tree1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/tree3.png" alt="Image 1"style="width:16%;">
+        <img src="output5/tree5.png" alt="Image 2"style="width:16%;">
+        <img src="output5/tree7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/tree10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/tree20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <p>Edited Hand-Drawn Images:</p>
+    <img src="output5/beach.jpg" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <p>Iterative steps [1,3,5,7,10,20]:</p>
+    <div class="img-row six">
+        <img src="output5/beach1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/beach3.png" alt="Image 1"style="width:16%;">
+        <img src="output5/beach5.png" alt="Image 2"style="width:16%;">
+        <img src="output5/beach7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/beach10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/beach20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <img src="output5/mountains.jpg" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <p>Iterative steps [1,3,5,7,10,20]:</p>
+    <div class="img-row six">
+        <img src="output5/mountain1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/mountain3.png" alt="Image 1"style="width:16%;">
+        <img src="output5/mountain5.png" alt="Image 2"style="width:16%;">
+        <img src="output5/mountain7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/mountain10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/mountain20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <h2>Part 1.7.2: Inpainting</h2>
+    <p>After implementing the inpaint function, below is the Campanile inpainted, with the top masked off:</p>
+    <img src="output5/inpaint1.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <p>For my own images, I masked away the sky in the beach photo and one half of the apple.</p>
+     <div class="img-row">
+        <img src="output5/beachy.jpg" alt="Image 1"style="width:50%;">
+        <img src="output5/apple.jpg" alt="Image 2"style="width:50%;">
+    </div> 
+    <p>Here are the results:</p>
+     <div class="img-row">
+        <img src="output5/inpainted2.png" alt="Image 1"style="width:50%;">
+        <img src="output5/inpaint3.png" alt="Image 2"style="width:50%;">
+    </div>
+    <h2>Part 1.7.3: Text-Conditional Image-to-image Translation</h2>
+    <p>Turning a sea turtle into the Campanile:</p>
+    <div class="img-row six">
+        <img src="output5/turt1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/turt2.png" alt="Image 1"style="width:16%;">
+        <img src="output5/turt3.png" alt="Image 2"style="width:16%;">
+        <img src="output5/turt4.png" alt="Image 3"style="width:16%;">
+        <img src="output5/turt5.png" alt="Image 3"style="width:16%;">
+        <img src="output5/turt6.png" alt="Image 3"style="width:16%;">
+    </div>
+    <p>Turning a mushroom forest into a beach:</p>
+    <div class="img-row six">
+        <img src="output5/MF1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/MF3.png" alt="Image 1"style="width:16%;">
+        <img src="output5/MF5.png" alt="Image 2"style="width:16%;">
+        <img src="output5/MF7.png" alt="Image 3"style="width:16%;">
+        <img src="output5/MF10.png" alt="Image 3"style="width:16%;">
+        <img src="output5/MF20.png" alt="Image 3"style="width:16%;">
+    </div>
+    <p>Turning a shrimp into an apple:</p>
+    <div class="img-row six">
+        <img src="output5/shrimp1.png" alt="Image 2"style="width:16%;">
+        <img src="output5/shrimp2.png" alt="Image 1"style="width:16%;">
+        <img src="output5/shrimp3.png" alt="Image 2"style="width:16%;">
+        <img src="output5/shrimp4.png" alt="Image 3"style="width:16%;">
+        <img src="output5/shrimp5.png" alt="Image 3"style="width:16%;">
+        <img src="output5/shrimp6.png" alt="Image 3"style="width:16%;">
+    </div>
+  </div>
+  <div class="task">
+    <h2>Part 1.8: Visual Anagrams</h2>
+    <p>After impleementing visual_anagrams function, the below 2 illusions are produced after multiple tries:</p>
+    <p>Lighthouse and mountain</p>
+    <div class="img-row">
+        <img src="output5/anagram1.png" alt="Image 1"style="width:50%;">
+        <img src="output5/anagram2.png" alt="Image 2"style="width:50%;">
+    </div>
+    <p>People around a campfire and mushroom forest</p>
+    <div class="img-row">
+        <img src="output5/anagramA.png" alt="Image 1"style="width:50%;">
+        <img src="output5/anagramB.png" alt="Image 2"style="width:50%;">
+    </div>
+    <h2>Part 1.9: Hybrid Images</h2>
+    <p>After implementing make_hybrids function, 2 hybrid images were created:</p>
+    <p>From close: Mountain. From afar: Bicycle. </p>
+    <img src="output5/mountainbicycle.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <br>
+    <img src="output5/mountainbicycle.png" alt="Task 2"style="width:3%; display:block; margin:auto;">
+    <p>From close: People around a campfire. From afar: Racecar. </p>
+    <img src="output5/OKAYcooked.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
+    <br>
+    <img src="output5/OKAYcooked.png" alt="Task 2"style="width:3%; display:block; margin:auto;">
+    
+  </div>
+
+</body>
