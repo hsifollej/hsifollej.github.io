@@ -72,7 +72,7 @@
   <h1>[PROJECT FIVE]</h1>
 
   <div class="task">
-    <h2>Part 0: Setup</h2>
+    <h2>Part A0: Setup</h2>
     <img src="output5/prompts.png" alt="Task 2"style="width:70%; display:block; margin:auto;">
     <p>These are the prompts in my dictionary. Below are the generated images using random seed = 17:</p>
     <p>Sea Turtle, Lighthouse, and Mushroom Forest (5 steps)</p>
@@ -97,14 +97,14 @@
   </div>
 
   <div class="task">
-    <h2>Part 1.1: Implementing the Forward Process</h2>
+    <h2>Part A1.1: Implementing the Forward Process</h2>
     <p>After implementing the noisy_im = forward(im,t) function, the Campanile at noise levels 250,500,750 are shown: </p>
     <div class="img-row three">
         <img src="output5/testimagenoise.png" alt="Image 1"style="width:33%;">
         <img src="output5/testnoise2.png" alt="Image 2"style="width:33%;">
         <img src="output5/testnoise3.png" alt="Image 3"style="width:33%;">
     </div>
-    <h2>Part 1.2: Classical Denoising</h2>
+    <h2>Part A1.2: Classical Denoising</h2>
     <p>Using Gaussian blur filtering to remove the noise did not produce desireable results. The Gaussian-denoised versions are below:</p>
     <div class="img-row">
         <img src="output5/testimagenoise.png" alt="Image 1"style="width:50%;">
@@ -118,7 +118,7 @@
         <img src="output5/testnoise3.png" alt="Image 1"style="width:50%;">
         <img src="output5/denoise3.png" alt="Image 2"style="width:50%;">
     </div>
-    <h2>Part 1.3: One-Step Denoising</h2>
+    <h2>Part A1.3: One-Step Denoising</h2>
     <p>Original Image:</p>
     <img src="output5/campanile.jpg" alt="Task 2"style="width:30%; display:block; margin:auto;">
     <p>Noisy images:</p>
@@ -133,7 +133,7 @@
         <img src="output5/denoisee2.png" alt="Image 2"style="width:33%;">
         <img src="output5/denoisee3.png" alt="Image 3"style="width:33%;">
     </div>
-    <h2>Part 1.4: One-Step Denoising</h2>
+    <h2>Part A1.4: One-Step Denoising</h2>
     <p>Noisy Campanile every 5th loop of denoising:</p>
     <div class="img-row five">
         <img src="output5/690.png" alt="Image 1"style="width:20%;">
@@ -151,7 +151,7 @@
   </div>
 
   <div class="task">
-    <h2>Part 1.5: Diffusion Model Sampling</h2>
+    <h2>Part A1.5: Diffusion Model Sampling</h2>
     <p>5 sampled images (not great quality):</p>
     <div class="img-row five">
         <img src="output5/wtf1.png" alt="Image 1"style="width:25%;">
@@ -161,7 +161,7 @@
         <img src="output5/wtf5.png" alt="Image 3"style="width:25%;">
     </div>
 
-    <h2>Part 1.6: Classifier-Free Guidance (CFG)</h2>
+    <h2>Part A1.6: Classifier-Free Guidance (CFG)</h2>
     <p>After implementing the iterative_denoise_cfg function, here are 5 better images:</p>
     <div class="img-row five">
         <img src="output5/wtaf1.png" alt="Image 1"style="width:25%;">
@@ -171,7 +171,7 @@
         <img src="output5/wtaf5.png" alt="Image 3"style="width:25%;">
     </div>
 
-    <h2>Part 1.7: Image-to-image Translation</h2>
+    <h2>Part A1.7: Image-to-image Translation</h2>
     <p>Series of edits that gradually match the original Campanile image:</p>
     <div class="img-row six">
         <img src="output5/camp1.png" alt="Image 2"style="width:16%;">
@@ -204,7 +204,7 @@
         <img src="output5/fountain10.png" alt="Image 3"style="width:16%;">
         <img src="output5/fountain20.png" alt="Image 3"style="width:16%;">
     </div>
-    <h2>Part 1.7.1: Editing Hand-Drawn and Web Images</h2>
+    <h2>Part A1.7.1: Editing Hand-Drawn and Web Images</h2>
     <p>Edited Web Image:</p>
     <img src="output5/moretree.jpg" alt="Task 2"style="width:50%; display:block; margin:auto;">
     <p>Iterative steps [1,3,5,7,10,20]:</p>
@@ -237,7 +237,7 @@
         <img src="output5/mountain10.png" alt="Image 3"style="width:16%;">
         <img src="output5/mountain20.png" alt="Image 3"style="width:16%;">
     </div>
-    <h2>Part 1.7.2: Inpainting</h2>
+    <h2>Part A1.7.2: Inpainting</h2>
     <p>After implementing the inpaint function, below is the Campanile inpainted, with the top masked off:</p>
     <img src="output5/inpaint1.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
     <p>For my own images, I masked away the sky in the beach photo and one half of the apple.</p>
@@ -250,7 +250,7 @@
         <img src="output5/inpainted2.png" alt="Image 1"style="width:50%;">
         <img src="output5/inpaint3.png" alt="Image 2"style="width:50%;">
     </div>
-    <h2>Part 1.7.3: Text-Conditional Image-to-image Translation</h2>
+    <h2>Part A1.7.3: Text-Conditional Image-to-image Translation</h2>
     <p>Turning a sea turtle into the Campanile:</p>
     <div class="img-row six">
         <img src="output5/turt1.png" alt="Image 2"style="width:16%;">
@@ -280,7 +280,7 @@
     </div>
   </div>
   <div class="task">
-    <h2>Part 1.8: Visual Anagrams</h2>
+    <h2>Part A1.8: Visual Anagrams</h2>
     <p>After impleementing visual_anagrams function, the below 2 illusions are produced after multiple tries:</p>
     <p>Lighthouse and mountain</p>
     <div class="img-row">
@@ -292,7 +292,7 @@
         <img src="output5/anagramA.png" alt="Image 1"style="width:50%;">
         <img src="output5/anagramB.png" alt="Image 2"style="width:50%;">
     </div>
-    <h2>Part 1.9: Hybrid Images</h2>
+    <h2>Part A1.9: Hybrid Images</h2>
     <p>After implementing make_hybrids function, 2 hybrid images were created:</p>
     <p>From close: Mountain. From afar: Bicycle. </p>
     <img src="output5/mountainbicycle.png" alt="Task 2"style="width:50%; display:block; margin:auto;">
@@ -304,5 +304,118 @@
     <img src="output5/OKAYcooked.png" alt="Task 2"style="width:3%; display:block; margin:auto;">
     
   </div>
+  <div class="task">
+    <h2>Part B1: Training a Single-Step Denoising UNet</h2>
+    <p>Implementing the denoiser as a UNet consisting of downsampling and upsampling blocks with skip connections, the goal is to have the neural network take a noisy image (z) and output something as close as possible to the original clean digit image from the MNIST. The loss is measuered using L2 Loss function: </p>
+    <img src="output5b/l2loss.png" alt="Task 2"style="width:45%; display:block; margin:auto;">
+    <h2>Part B1.2: Using the Unet to Train a Denoiser</h2>
+    <p>The clean MNIST images are made noisy by varying σ in the following equation: </p> 
+    <img src="output5b/noise.png" alt="Task 2"style="width:63%; display:block; margin:auto;">
+    <p>Visualising the different noising porcesses over σ = [0.0,0.2,0.4,0.5,0.6,0.8,1.0] assuming normalised x, it is observed that the images become more noisy as σ increases. </p>
+    <img src="output5b/part1.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    
+  </div> 
+
+  <div class="task">
+    <h2>Part B1.2.1: Training</h2>
+    <p>In this part, the UNet is trained to denoise the noisy images z with fixed σ = 0.5 applied to clean image x. The parameters are batch size = 256, epoch = 5, learing rate = 1e-4, and hidden dimension = 128.</p>
+    <p>The training loss curve was plotted every 100 iterations, as shown below:</p>
+    <div class="img-row three">
+        <img src="output5b/loss100.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss200.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss300.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss400.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss500.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss600.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss700.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss800.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss900.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss1000.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss1100.png" alt="Image 1"style="width:33%;">  
+        <img src="output5b/lossFINAL.png" alt="Image 1"style="width:33%;">
+      </div>
+    <p>After 5 epochs of training, the sample results for the 1st and 5th epoch are as shown (first row is input, second row is noisy image, third row is output):</p>
+    <img src="output5b/epoch1again.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <img src="output5b/epoch5again.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>The output after the 5th epoch is sharper and more defined than the 1st, though the output digits from the 1st epoch are also very recognisable.</p>
+ 
+    <h2>Part B1.2.2: Out-of-Distribution Testing</h2>
+    <p>In this part, the denoiser will be tested on different σ values that it was not trained for to see how well it can generalise to other noise levels. The sample results on the test set with out-of-distribution noise levels after model training is as shown below: </p>
+    <img src="output5b/outdistreal.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>It is observed that the trained model performs decently well until σ>0.6. </p>
+    <h2>Part B1.2.3: Denoising Pure Noise</h2>
+    <p>Now, the denoiser is fed pure, random Gaussian noise to see what clean image gets produced.</p>
+    <p>The training loss curves were plotted every 100 iterations:</p>
+    <div class="img-row three">
+        <img src="output5b/loss100123.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss200123.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss300123.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss400123.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss500123.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss600123.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss700123.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss800123.png" alt="Image 1"style="width:33%;">
+        <img src="output5b/loss900123.png" alt="Image 2"style="width:33%;">
+    </div>
+    <div class="img-row three">
+        <img src="output5b/loss1000123.png" alt="Image 2"style="width:33%;">
+        <img src="output5b/loss1100123.png" alt="Image 1"style="width:33%;">  
+        <img src="output5b/part123trainiglossfinal.png" alt="Image 1"style="width:33%;">
+      </div>
+    <p>After 1 epoch:</p>
+    <img src="output5b/epochone.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>After 5 epochs:</p>
+    <img src="output5b/epochfive.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <p>With an MSE loss, the model learns to preduct the point that minimises the sum of squared distances to all training examples. Relating this to the idea of a centroid in clustering, this means the model learns to output the average of all possible images that could correspond to a noisy input, and results are the average of many images seen by the model. Thus, the expected results are a blur of all ambiguous possible digit shapes rather than sharp, distinguishable digits. This is verified by the actual output, where the "clean" images produced looks like many digits all at once. (8,9,3,5,0 etc.) </p>
+   
+  </div> 
+
+  <div class="task">
+    <h2>Part B2: Training a Flow Matching Model</h2>
+    <p>The one-step denoising is not effective for generative tasks, so this part focuses on iteratively denoising the image with flow matching, a multi-step procedure that gradually morphs noise into a clean image.</p>
+    <p>Flow matching works by starting with a pure noise image x0, a real MNIST image x1, and for a time t between 0 and 1, define an in-between image x_t as a linear interpolation between x0 and x1. When t=0, x_t is noise and when t=1, x_t is a clean image. When t is between 0 and 1, x_t is a mix of the two images. Flow is essentially velocity and determines how the images should move if time increments bit by bit. The goal is to train UNet to approximate this flow/velocity, such that when given a partially-noisy image x_t at time t, the UNet can predict the direction you should move the image to go closer to x1.</p>
+    <img src="output5b/flow.png" alt="Task 2"style="width:80%; display:block; margin:auto;">
+    <img src="output5b/velocity.png" alt="Task 2"style="width:40%; display:block; margin:auto;">
+
+    <h2>Part B2.1-2.2: Adding Time Conditioning to UNet and Training</h2>
+    <p>Previously, the UNet took just an image as input. Now, it also needs to know what the value of t is, as the correct flow depends on how far the path already is from noise to data.</p>
+    <p>The training loop this time is to sample a real MNIST image x1 and a random noise x0 from a Gaussian, and pick a random t in [0,1]. Compute the in-between image x_t and true flow u, then feed x_t and t into time-conditioned UNet. Train the model to output u until model converges. The training loss curve plot over the whole training process is as follows:  </p>
+    <img src="output5b/traininglosspart2.png" alt="Task 2"style="width:80%; display:block; margin:auto;">
+
+    <h2>Part B2.3: Sampling from the UNet</h2>
+    <p>The UNet for iterative denoising is now ready to use. Here are the sampling results from the time-conditioned UNet for 1,5, and 10 epochs. Only a few digits are recognisable (6,9,0,4)</p>
+    <img src="output5b/time1.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <img src="output5b/time5.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+    <img src="output5b/time10.png" alt="Task 2"style="width:100%; display:block; margin:auto;">
+  </div> 
+
+  <div class="task">
+    <h2>Part B2.4-2.5: Adding Class-Conditioning to UNet and Training</h2>
+    <p>In addition to x_t and t, the model is fed another input called class label c(0-9). c is represented as a one-hot vector (length 10, all zeroes except 1 in the position of the data), and more FCBlocks are used to turn t and c into vectors (t1,c1,t2,c2). They are combined with the UNet feature maps. However, since we want the UNet to work with or without the class conditioning, c is set to 0 for 10% of the training duration. </p>
+    <p>For training in part 2.5, c is also passed into the network, and occasionally set to 0 for unconditional training. The training loss curve for class-conditioned UNet over the whole training process is as follows:</p>
+    <img src="output5b/training2.5second.png" alt="Task 2"style="width:80%; display:block; margin:auto;">
+
+    <h2>Part B2.6: Sampling from the UNet</h2>
+    <p>Lastly, digits will be generated by specifying the class and using classifier-free guidance with γ=5.0. The sampled results from class-conditioned UNet for 1,5,and 10 epochs are below:</p>
+    <img src="output5b/2.6epoch1.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <img src="output5b/2.6epoch5.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <img src="output5b/2.6epoch10.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <p>Removing the exponential learning rate scheduler but keeping performance similar by tweaking other parameters, the results after training without scheduler are visualised: </p>
+    <img src="output5b/noscheduleepoch1.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <img src="output5b/noscheduleepoch5.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <img src="output5b/noscheduleten.png" alt="Task 2"style="width:60%; display:block; margin:auto;">
+    <p>To compensate for the loss of the scheduler, I used a constant learning rate of 3e-3 throughout the 10 epochs of training, no other hyperparameter tuning was done. This is because the original exponential learning rate scheduler starts at a high learning rate then decays to a low one, which is compensated by taking a constant middle-ground learning rate, calculated using the geometric mean of the start and end learning rate of the scheduler. Qualitatively, the results without the scheduler are comparable to those with the scheduler.</p>
+  </div> 
+
 
 </body>
